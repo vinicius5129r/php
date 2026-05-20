@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário</title>
+  </head>
+  <body>
+    <h2>Formulário</h2>
+    <!-- Formulário que envia os dados para o arquivo receber.php usando o método POST -->
+    <form method="post" action="receber.php">
+      <label>Nome: </label>
+      <!-- Campo para inserir o nome -->
+      <input type="text" name="nome" id="nome" />
+      <label>Idade: </label>
+      <!-- Campo para inserir a idade -->
+      <input type="number" name="idade" id="idade" />
+      <!-- Botão para enviar os dados do formulário -->
+      <input type="submit" value="Enviar" />
+    </form>
+  </body>
+</html>

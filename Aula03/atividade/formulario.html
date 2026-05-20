@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário de Paciente</title>
+    <script>
+      function validarFormulario() {
+        const email = document.getElementById("email").value;
+        const dataConsulta = document.getElementById("data_consulta").value;
+        const cpf = document.getElementById("cpf").value;
+        const erroEmail = document.getElementById("erroEmail");
+        const erroDataConsulta = document.getElementById("erroDataConsulta");
+        const erroCPF = document.getElementById("erroCPF");
+
+        // Expressões regulares para validação
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regexDataConsulta = (/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1");
+        const regexCPF = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+        let valido = true;
+
+        // Validação do email
+        if (!regexEmail.test(email)) {
+          erroEmail.textContent = "E-mail inválido.";
+          valido = false;
+        } else {
+          erroEmail.textContent = "";
+        }
+
+        // Validação da data de consulta
+        if (!regexDataConsulta.test(dataConsulta)) {
+          erroDataConsulta.textContent = "Data de consulta inválida.";
+          valido = false;
+        } else {
+          erroDataConsulta.textContent = "";
+        }
+
+        // Validação do CPF
+        if (!regexCPF.test(cpf)) {
+          erroCPF.textContent = "CPF inválido.";
+          valido = false;
+        } else {
+          erroCPF.textContent = "";
+        }
+
+        return valido;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Formulário de Paciente</h1>
+    <form
+      method="post"
+      action="documento.php"
+      onsubmit="return validarFormulario();"
+    >
+      <label>Nome completo: </label>
+      <input type="text" name="nome" id="nome" />
+      <label>E-mail: </label>
+      <input type="email" name="email" id="email" />
+      <label>Idade: </label>
+      <input type="number" name="idade" id="idade" />
+      <label>Data consulta: </label>
+      <input type="date" name="data_consulta" id="data_consulta" />
+      <label>CPF: </label>
+      <input type="text" name="cpf" id="cpf" />
+
+      <input type="submit" value="Enviar" />
+    </form>
+    <!-- Máscara -->
+    <script>
+      // Máscara para o campo de CPF
+      const cpfInput = document.getElementById("cpf");
+      cpfInput.addEventListener("input", function () {
+        let value = this.value.replace(/\D/g, "");
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d{2})$/, "$1-$2");
+        this.value = value;
+      });
+      // Máscara para o campo de data de consulta
+      const dataConsultaInput = document.getElementById("data_consulta");
+      dataConsultaInput.addEventListener("input", function () {
+        let value = this.value.replace(/\D/g, "");
+        value = value.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+        this.value = value;
+      });
+    </script>
+  </body>
+</html>
