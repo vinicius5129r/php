@@ -8,7 +8,7 @@ $obs = $_POST['txtobs'];
 $dataAniv = $_POST['txtdataaniv'];
 
 //conexão com o banco de dados
-$conexaoBD = mysqli_connect("localhost", "root", "", "meu_banco");
+$conexaoBD = mysqli_connect("localhost", "root", "", "meu_banco", 3307);
 //Verificar se a conexão foi bem-sucedida
 if(!$conexaoBD){
     die("Erro ao conectar ao banco de dados: " . mysqli_connect_error());
